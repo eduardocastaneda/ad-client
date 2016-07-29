@@ -1,16 +1,38 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 require('angular')
-var InputController = require('./controllers/InputController')
+var inputController = require('./controllers/input')
+var translateService = require('./services/translate')
 
 var app = angular.module('app', [])
-app.controller('InputController', ['$scope', InputController])
-},{"./controllers/InputController":2,"angular":4}],2:[function(require,module,exports){
-var input = function($scope) {
-  
+app.factory('Translate', ['$http', translateService])
+app.controller('InputController', ['$scope', 'Translate', inputController])
+},{"./controllers/input":2,"./services/translate":3,"angular":5}],2:[function(require,module,exports){
+var input = function($scope, Translate) {
+  var test = Translate.reverse('hej');
 }
 
 module.exports = input;
 },{}],3:[function(require,module,exports){
+var translate = function($http) {
+  return {
+    reverse: function(text, callback) {
+      $http({
+          method: 'GET',
+          url: 'http://localhost:3000/reverse/test test 123',
+          dataType: 'jsonp'
+      }).then(function successCallback(response) {
+          if(callback) callback();
+          console.log(response);
+          }, function errorCallback(response) {
+          console.log(response);
+      });
+    }
+  };
+}
+
+
+module.exports = translate;
+},{}],4:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -31779,8 +31801,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":3}]},{},[1]);
+},{"./angular":4}]},{},[1]);

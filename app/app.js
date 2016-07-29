@@ -1,5 +1,7 @@
 require('angular')
-var InputController = require('./controllers/InputController')
+var inputController = require('./controllers/input')
+var translateService = require('./services/translate')
 
 var app = angular.module('app', [])
-app.controller('InputController', ['$scope', InputController])
+app.factory('Translate', ['$http', translateService])
+app.controller('InputController', ['$scope', 'Translate', inputController])

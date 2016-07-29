@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>My App</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/main.js"></script>
+</head>
+<body>
+  <div ng-controller="InputController">
+    <input type="text" ng-model="sentence" />
+    <h2 ng-bind="sentence"></h2>
+    <h1 ng-bind="message"></h1>
+  </div>
+
+</body>
+
+</html>

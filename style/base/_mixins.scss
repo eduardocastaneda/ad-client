@@ -1,0 +1,73 @@
+/* Mixin queries*/
+
+@mixin media-smallmobile {
+  @if not $isIE8 {
+    @media (min-width: 30em) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+@mixin media-bigmobile {
+  @if not $isIE8 {
+    @media (min-width: 40em) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+@mixin media-tablet {
+  @if not $isIE8 {
+    @media (min-width: 48em) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+@mixin media-tabletland {
+  @if not $isIE8 {
+    @media (min-width: 61.25em) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+@mixin media-desktop {
+  @if not $isIE8 {
+    @media (min-width: 64.2em) {
+      //1024px
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+@mixin media-bigdesktop {
+  @if not $isIE8 {
+    @media (min-width: 72.5em) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+@mixin media-outergrid {
+  @if not $isIE8 {
+    @media (min-width: 93.75em) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}

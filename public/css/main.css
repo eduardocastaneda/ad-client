@@ -501,7 +501,8 @@ body {
   min-height: 64px; }
 
 .related {
-  background-color: #407F7F; }
+  background-color: #407F7F;
+  min-height: 176px; }
 
 .related__list-holder {
   margin: 0 auto;

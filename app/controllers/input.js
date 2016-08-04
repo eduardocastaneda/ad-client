@@ -1,4 +1,4 @@
-var input = function($scope, Translate, $routeParams, $location) {
+var input = function($scope, Reverse, $routeParams, $location) {
   $scope.message = '';
   
   $scope.submit = function() {
@@ -7,7 +7,7 @@ var input = function($scope, Translate, $routeParams, $location) {
   }
 
   $scope.reverseMessage = function(message) {
-    Translate.reverse(message, function(result) {
+    Reverse.message(message, function(result) {
       $scope.reversedMessage = result;
     });
   }

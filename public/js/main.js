@@ -3,14 +3,16 @@ require('angular')
 require('angular-route')
 var inputController = require('./controllers/input')
 var reverseController = require('./controllers/reverse')
-var translateService = require('./services/translate')
+var reverseService = require('./services/reverse')
+var listService = require('./services/list')
 
 var app = angular.module('app', ['ngRoute'])
 
-app.factory('Translate', ['$http', translateService])
+app.factory('Reverse', ['$http', reverseService])
+app.factory('List', ['$http', listService])
 
-app.controller('InputController', ['$scope', 'Translate', '$routeParams', '$location', inputController])
-app.controller('ReverseController', ['$scope', 'Translate', '$routeParams', '$location', reverseController])
+app.controller('InputController', ['$scope', 'Reverse', '$routeParams', '$location', inputController])
+app.controller('ReverseController', ['$scope', 'Reverse', 'List', '$routeParams', '$location', reverseController])
 
 app.config(['$routeProvider', '$locationProvider' , function($routeProvider, $locationProvider) {
   $routeProvider
@@ -28,8 +30,8 @@ app.config(['$routeProvider', '$locationProvider' , function($routeProvider, $lo
 
   $locationProvider.html5Mode(true);
 }]);
-},{"./controllers/input":2,"./controllers/reverse":3,"./services/translate":4,"angular":8,"angular-route":6}],2:[function(require,module,exports){
-var input = function($scope, Translate, $routeParams, $location) {
+},{"./controllers/input":2,"./controllers/reverse":3,"./services/list":4,"./services/reverse":5,"angular":9,"angular-route":7}],2:[function(require,module,exports){
+var input = function($scope, Reverse, $routeParams, $location) {
   $scope.message = '';
   
   $scope.submit = function() {
@@ -38,7 +40,7 @@ var input = function($scope, Translate, $routeParams, $location) {
   }
 
   $scope.reverseMessage = function(message) {
-    Translate.reverse(message, function(result) {
+    Reverse.message(message, function(result) {
       $scope.reversedMessage = result;
     });
   }
@@ -46,10 +48,15 @@ var input = function($scope, Translate, $routeParams, $location) {
 
 module.exports = input;
 },{}],3:[function(require,module,exports){
-var translated = function($scope, Translate, $routeParams, $location) {
-  $scope.message = $routeParams.message.replace(/-/g, " ")
+var reverse = function($scope, Reverse, List, $routeParams, $location) {
+  $scope.message = $routeParams.message.replace(/-/g, " ");
+  $scope.relatedItems = 
 
-  Translate.reverse($scope.message, function(result) {
+  List.get(function(result){
+    $scope.relatedItems = result;
+  })
+
+  Reverse.message($scope.message, function(result) {
     $scope.reversedMessage = result;
   });
   
@@ -59,71 +66,54 @@ var translated = function($scope, Translate, $routeParams, $location) {
   }
 
   $scope.reverseMessage = function(message) {
-    Translate.reverse(message, function(result) {
+    Reverse.message(message, function(result) {
       $scope.newReversedMessage = result;
     });
   }
 
-  $scope.relatedItems = [
-    {
-      'message' : 'Skriv en bok som alla läser',
-      'url' : '/reverse/skriv-en-bok-som-alla-läser'
-    },
-    {
-      'message' : 'Sy upp en kollektion med kläder',
-      'url' : '/reverse/sy-upp-en-kollektion-med-kläder'
-    },
-    {
-      'message' : 'Säg ett ord som blir bevingat',
-      'url' : '/reverse/säg-ett-ord-som-blir-bevingat'
-    },
-    {
-      'message' : 'Sätt en flagga på en topp',
-      'url' : '/reverse/sätt-en-flagga-på-en-topp'
-    },
-    {
-      'message' : 'Korsa apor med kaniner',
-      'url' : '/reverse/korsa-apor-med-kaniner'
-    },
-    {
-      'message' : 'Få ett pris ur kungens hand',
-      'url' : '/reverse/få-ett-pris-ur-kungens-hand'
-    },
-    {
-      'message' : 'Vi kommer alltid att leva',
-      'url' : '/reverse/vi-kommer-alltid-att-leva'
-    },
-    {
-      'message' : 'Vi kommer aldrig att dö',
-      'url' : '/reverse/vi-kommer-aldrig-att-dö'
-    }
-  ];
+  
 }
 
-module.exports = translated;
+module.exports = reverse;
 },{}],4:[function(require,module,exports){
-var translate = function($http) {
+var list = function($http) {
   return {
-    reverse: function(text, callback) {
+    get: function(callback) {
       $http({
-          method: 'POST',
-          url: 'http://localhost:3000/reverse/',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-          },
-          data:'message=' + text
-      }).then(function successCallback(response) {
-          if(callback) callback(response.data);
-          }, function errorCallback(response) {
+          method: 'GET',
+          url: 'http://localhost:3000/list/'
+      }).then(function success(response) {
+          callback(response.data);
+          }, function error(response) {
           console.log(response);
       });
     }
   };
 }
 
-
-module.exports = translate;
+module.exports = list;
 },{}],5:[function(require,module,exports){
+var reverse = function($http) {
+  return {
+    message: function(message, callback) {
+      $http({
+          method: 'POST',
+          url: 'http://localhost:3000/reverse/',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+          data:'message=' + message
+      }).then(function success(response) {
+          callback(response.data);
+          }, function error(response) {
+          console.log(response);
+      });
+    }
+  };
+}
+
+module.exports = reverse;
+},{}],6:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -1194,11 +1184,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":5}],7:[function(require,module,exports){
+},{"./angular-route":6}],8:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -32967,8 +32957,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":7}]},{},[1]);
+},{"./angular":8}]},{},[1]);

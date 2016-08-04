@@ -1,28 +1,31 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 require('angular')
 require('angular-route')
-var inputController = require('./controllers/input')
+var homeController = require('./controllers/home')
 var reverseController = require('./controllers/reverse')
 var reverseService = require('./services/reverse')
 var listService = require('./services/list')
+var reverseFormDirective = require('./directives/reverse-form')
 
 var app = angular.module('app', ['ngRoute'])
 
 app.factory('Reverse', ['$http', reverseService])
 app.factory('List', ['$http', listService])
 
-app.controller('InputController', ['$scope', 'Reverse', '$routeParams', '$location', inputController])
-app.controller('ReverseController', ['$scope', 'Reverse', 'List', '$routeParams', '$location', reverseController])
+app.directive('reverseForm', ['Reverse', '$location', reverseFormDirective]);
+
+app.controller('HomeCtrl', ['$scope', '$routeParams', homeController])
+app.controller('ReverseCtrl', ['$scope', 'Reverse', 'List', '$routeParams', reverseController])
 
 app.config(['$routeProvider', '$locationProvider' , function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: '/views/input.html',
-      controller: 'InputController'
+      templateUrl: '/views/home.html',
+      controller: 'HomeCtrl'
     })
     .when('/reverse/:message', {
       templateUrl: '/views/reverse.html',
-      controller: 'ReverseController'
+      controller: 'ReverseCtrl'
     });
   $routeProvider.otherwise({
       redirectTo: '/'
@@ -30,52 +33,62 @@ app.config(['$routeProvider', '$locationProvider' , function($routeProvider, $lo
 
   $locationProvider.html5Mode(true);
 }]);
-},{"./controllers/input":2,"./controllers/reverse":3,"./services/list":4,"./services/reverse":5,"angular":9,"angular-route":7}],2:[function(require,module,exports){
-var input = function($scope, Reverse, $routeParams, $location) {
-  $scope.message = '';
-  
-  $scope.submit = function() {
-      var message = $scope.message;
-      $location.path('/reverse/' + message.replace(/ /g, '-'));
-  }
+},{"./controllers/home":2,"./controllers/reverse":3,"./directives/reverse-form":4,"./services/list":5,"./services/reverse":6,"angular":10,"angular-route":8}],2:[function(require,module,exports){
+var home = function($scope) { 
 
-  $scope.reverseMessage = function(message) {
-    Reverse.message(message, function(result) {
-      $scope.reversedMessage = result;
-    });
-  }
 }
 
-module.exports = input;
+module.exports = home;
 },{}],3:[function(require,module,exports){
-var reverse = function($scope, Reverse, List, $routeParams, $location) {
-  $scope.message = $routeParams.message.replace(/-/g, " ");
-  $scope.relatedItems = 
+var reverse = function($scope, Reverse, List, $routeParams) {
+  $scope.headerMessage = $routeParams.message.replace(/-/g, " ");
 
   List.get(function(result){
     $scope.relatedItems = result;
   })
 
-  Reverse.message($scope.message, function(result) {
-    $scope.reversedMessage = result;
+  Reverse.message($scope.headerMessage, function(result) {
+    $scope.headerReversedMessage = result;
   });
-  
-  $scope.submit = function() {
-      var message = $scope.newMessage;
-      $location.path('/reverse/' + message.replace(/ /g, '-'));
-  }
-
-  $scope.reverseMessage = function(message) {
-    Reverse.message(message, function(result) {
-      $scope.newReversedMessage = result;
-    });
-  }
-
-  
 }
 
 module.exports = reverse;
 },{}],4:[function(require,module,exports){
+var reverseForm = function(Reverse, $location) {
+  return {
+    restrict : 'E',
+    template: '<div class="message">' +
+                '<h2 class="message-text">Skriv in en mening som skall översättas</h2>' +
+                '<div class="message-input">' +
+                  '<form ng-submit="submit()">' +
+                    '<input class="message-input__input" ng-focus type="text" ng-model="message" ng-keyup="reverseMessage(message)" name="text" autocomplete="off" />' +
+                    '<input class="message-input__button" type="submit" id="submit" value="ÖVERSÄTT" />' +
+                  '</form>' +
+                '</div>' +
+                '<div class="message-result">' +
+                  '<h2 ng-bind="reversedMessage"></h2>' + 
+                '</div>' +
+              '</div>',
+
+    link: function(scope) {
+      scope.message = '';
+  
+      scope.submit = function() {
+          var message = scope.message;
+          $location.path('/reverse/' + message.replace(/ /g, '-'));
+      }
+
+      scope.reverseMessage = function(message) {
+        Reverse.message(message, function(result) {
+          scope.reversedMessage = result;
+        });
+      }
+    }
+  };
+}
+
+module.exports = reverseForm;
+},{}],5:[function(require,module,exports){
 var list = function($http) {
   return {
     get: function(callback) {
@@ -92,7 +105,7 @@ var list = function($http) {
 }
 
 module.exports = list;
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var reverse = function($http) {
   return {
     message: function(message, callback) {
@@ -113,7 +126,7 @@ var reverse = function($http) {
 }
 
 module.exports = reverse;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -1184,11 +1197,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":6}],8:[function(require,module,exports){
+},{"./angular-route":7}],9:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -32957,8 +32970,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":8}]},{},[1]);
+},{"./angular":9}]},{},[1]);

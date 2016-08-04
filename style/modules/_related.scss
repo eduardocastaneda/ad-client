@@ -1,0 +1,33 @@
+.related {
+  background-color: $sg-green3;
+}
+
+.related__list-holder {
+  margin: 0 auto;
+  padding: 20px 0 40px;
+  width: 980px;
+}
+
+.related__list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.related__header {
+  color: $sg-green5;
+  margin-bottom: 10px;
+}
+
+.related__list-item {
+  display: block;
+  flex: 1 0 200px;
+  padding: 10px 10px 10px 0;
+  font-size: 15px;
+  font-family: Helvetica;
+}
+
+.related__list-item-link, 
+.related__list-item-link:visited {
+  color: black;
+}

@@ -1,0 +1,28 @@
+<div class="main">
+  <div class="result">
+    <h3 class="result__message" ng-bind="message"></h3>
+    <h1 class="result__reversed-message" ng-bind="reversedMessage"></h1>
+  </div>
+  <div class="message">
+    <h2 class="message-text">Skriv in en mening som skall översättas</h2>
+    <div class="message-input">
+      <form ng-submit="submit()">
+          <input class="message-input__input" ng-focus type="text" ng-model="newMessage" ng-keyup="reverseMessage(newMessage)" name="text" autocomplete="off" />
+          <input class="message-input__button" type="submit" id="submit" value="ÖVERSÄTT" />
+      </form>
+    </div>
+    <div class="message-result">
+      <h2 ng-bind="newReversedMessage"></h2>
+    </div>
+  </div>
+  <div class="related">
+    <div class="related__list-holder">
+      <h3 class="related__header">Andra har även översatt:</h3>
+      <ul class="related__list">
+        <li ng-repeat="item in relatedItems" class="related__list-item">
+          <a href="{{item.url}}" class="related__list-item-link">{{item.message}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

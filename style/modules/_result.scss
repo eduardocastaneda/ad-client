@@ -1,0 +1,18 @@
+.result {
+  width: 980px;
+  margin: 0 auto 80px;
+  font-size: 28px;
+}
+
+.result__message {
+  color: $sg-green6;
+  margin: 0 0 20px 0;
+  font-family: Helvetica;
+}
+
+.result__reversed-message {
+  color: $sg-green5;
+  margin: 0;
+  font-family: Helvetica;
+  min-height: 64px;
+}

@@ -1,3 +1,51 @@
-input {
-  color: blue;
+.message {
+  display: block;
+  margin: 0 auto 100px;
+  width: 980px;
+}
+
+.message-text {
+  color: $sg-green2;
+  font-family: Helvetica;
+}
+
+.message-input {
+  background-color: $sg-green3;
+  width: 100%;
+  border-radius: 6px;
+  padding: 40px;
+}
+
+.message-input__input {
+  border-radius: 6px;
+  background-color: white;
+  border: none;
+  height: 40px;
+  margin-right: 5px;
+  width: 780px;
+  padding: 10px;
+  font-size: 18px;
+  vertical-align: top;
+}
+
+.message-input__button {
+  border-radius: 6px;
+  background-color: lightgrey;
+  color: grey;
+  border: none;
+  height: 40px;
+  padding: 5px 20px;
+  vertical-align: top;
+}
+
+.message-input__input:focus {
+  outline: none;
+  border: none;
+}
+
+.message-result {
+  color: $sg-green5;
+  font-size: 28px;
+  font-family: Helvetica;
+  text-align: center;
 }

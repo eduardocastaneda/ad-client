@@ -433,7 +433,97 @@ table {
 
 /* Mixin queries*/
 body {
-  color: red; }
+  background-color: #226666; }
 
-input {
-  color: blue; }
+.main {
+  width: 100%;
+  padding-top: 50px; }
+
+.message {
+  display: block;
+  margin: 0 auto 100px;
+  width: 980px; }
+
+.message-text {
+  color: #669999;
+  font-family: Helvetica; }
+
+.message-input {
+  background-color: #407F7F;
+  width: 100%;
+  border-radius: 6px;
+  padding: 40px; }
+
+.message-input__input {
+  border-radius: 6px;
+  background-color: white;
+  border: none;
+  height: 40px;
+  margin-right: 5px;
+  width: 780px;
+  padding: 10px;
+  font-size: 18px;
+  vertical-align: top; }
+
+.message-input__button {
+  border-radius: 6px;
+  background-color: lightgrey;
+  color: grey;
+  border: none;
+  height: 40px;
+  padding: 5px 20px;
+  vertical-align: top; }
+
+.message-input__input:focus {
+  outline: none;
+  border: none; }
+
+.message-result {
+  color: #003333;
+  font-size: 28px;
+  font-family: Helvetica;
+  text-align: center; }
+
+.result {
+  width: 980px;
+  margin: 0 auto 80px;
+  font-size: 28px; }
+
+.result__message {
+  color: #044343;
+  margin: 0 0 20px 0;
+  font-family: Helvetica; }
+
+.result__reversed-message {
+  color: #003333;
+  margin: 0;
+  font-family: Helvetica;
+  min-height: 64px; }
+
+.related {
+  background-color: #407F7F; }
+
+.related__list-holder {
+  margin: 0 auto;
+  padding: 20px 0 40px;
+  width: 980px; }
+
+.related__list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; }
+
+.related__header {
+  color: #003333;
+  margin-bottom: 10px; }
+
+.related__list-item {
+  display: block;
+  flex: 1 0 200px;
+  padding: 10px 10px 10px 0;
+  font-size: 15px;
+  font-family: Helvetica; }
+
+.related__list-item-link,
+.related__list-item-link:visited {
+  color: black; }

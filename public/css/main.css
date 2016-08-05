@@ -433,72 +433,12 @@ table {
 
 /* Mixin queries*/
 body {
-  background-color: #226666; }
+  background-color: #226666;
+  font-family: Helvetica, Arial; }
 
 .main {
   width: 100%;
   padding-top: 50px; }
-
-.message {
-  display: block;
-  margin: 0 auto 100px;
-  width: 980px; }
-
-.message-text {
-  color: #669999;
-  font-family: Helvetica; }
-
-.message-input {
-  background-color: #407F7F;
-  width: 100%;
-  border-radius: 6px;
-  padding: 40px; }
-
-.message-input__input {
-  border-radius: 6px;
-  background-color: white;
-  border: none;
-  height: 40px;
-  margin-right: 5px;
-  width: 780px;
-  padding: 10px;
-  font-size: 18px;
-  vertical-align: top; }
-
-.message-input__button {
-  border-radius: 6px;
-  background-color: lightgrey;
-  color: grey;
-  border: none;
-  height: 40px;
-  padding: 5px 20px;
-  vertical-align: top; }
-
-.message-input__input:focus {
-  outline: none;
-  border: none; }
-
-.message-result {
-  color: #003333;
-  font-size: 28px;
-  font-family: Helvetica;
-  text-align: center; }
-
-.result {
-  width: 980px;
-  margin: 0 auto 80px;
-  font-size: 28px; }
-
-.result__message {
-  color: #044343;
-  margin: 0 0 20px 0;
-  font-family: Helvetica; }
-
-.result__reversed-message {
-  color: #003333;
-  margin: 0;
-  font-family: Helvetica;
-  min-height: 64px; }
 
 .related {
   background-color: #407F7F;
@@ -506,25 +446,103 @@ body {
 
 .related__list-holder {
   margin: 0 auto;
-  padding: 20px 0 40px;
-  width: 980px; }
+  padding: 20px 3% 40px; }
+  @media (min-width: 64.2em) {
+    .related__list-holder {
+      width: 980px;
+      padding: 20px 0 40px; } }
+
+.related__header {
+  color: #003333;
+  margin-bottom: 10px; }
 
 .related__list {
   width: 100%;
   display: flex;
   flex-wrap: wrap; }
 
-.related__header {
-  color: #003333;
-  margin-bottom: 10px; }
-
 .related__list-item {
   display: block;
   flex: 1 0 200px;
   padding: 10px 10px 10px 0;
-  font-size: 15px;
+  font-size: 1.15rem;
   font-family: Helvetica; }
 
 .related__list-item-link,
 .related__list-item-link:visited {
-  color: black; }
+  color: #000000; }
+
+.result {
+  margin: 0 auto 60px;
+  font-size: 24px;
+  padding: 0 3%; }
+  @media (min-width: 64.2em) {
+    .result {
+      width: 980px;
+      font-size: 2.15rem;
+      margin: 0 auto 80px;
+      padding: 0; } }
+
+.result__message {
+  color: #044343;
+  margin: 0 0 20px 0; }
+
+.result__reversed-message {
+  color: #003333;
+  margin: 0;
+  min-height: 64px; }
+
+.reverse-form {
+  display: block;
+  margin: 0 auto 100px;
+  width: 100%;
+  padding: 0 3%; }
+  @media (min-width: 64.2em) {
+    .reverse-form {
+      width: 980px;
+      padding: 0; } }
+
+.reverse-form__headline {
+  color: #669999; }
+
+.reverse-form__form {
+  background-color: #407F7F;
+  width: 100%;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap; }
+  @media (min-width: 30em) {
+    .reverse-form__form {
+      padding: 40px; } }
+
+.reverse-form__form-input {
+  border-radius: 6px;
+  border: none;
+  padding: 10px;
+  font-size: 1.4rem;
+  margin-bottom: 7px;
+  flex: 1 0 200px; }
+  .reverse-form__form-input:focus {
+    outline: none;
+    border: none; }
+  @media (min-width: 30em) {
+    .reverse-form__form-input {
+      margin-right: 5px;
+      margin-bottom: 0; } }
+
+.reverse-form__form-button {
+  border-radius: 6px;
+  background-color: #d3d3d3;
+  color: #808080;
+  border: none;
+  padding: 13px 20px;
+  flex: 0 0 100%; }
+  @media (min-width: 30em) {
+    .reverse-form__form-button {
+      flex: 0 0 auto; } }
+
+.reverse-form__result {
+  color: #003333;
+  font-size: 2.15rem;
+  text-align: center; }

@@ -5,8 +5,17 @@
 
 .related__list-holder {
   margin: 0 auto;
-  padding: 20px 0 40px;
-  width: 980px;
+  padding: 20px 3% 40px;
+  
+  @include media-desktop {
+    width: $main-width;
+    padding: 20px 0 40px;
+  }
+}
+
+.related__header {
+  color: $sg-green5;
+  margin-bottom: 10px;
 }
 
 .related__list {
@@ -15,20 +24,15 @@
   flex-wrap: wrap;
 }
 
-.related__header {
-  color: $sg-green5;
-  margin-bottom: 10px;
-}
-
 .related__list-item {
   display: block;
   flex: 1 0 200px;
   padding: 10px 10px 10px 0;
-  font-size: 15px;
+  font-size: $font-small;
   font-family: Helvetica;
 }
 
 .related__list-item-link, 
 .related__list-item-link:visited {
-  color: black;
+  color: $black;
 }

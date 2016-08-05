@@ -1,0 +1,66 @@
+.reverse-form {
+  display: block;
+  margin: 0 auto 100px;
+  width: 100%;
+  padding: 0 3%;
+
+  @include media-desktop {
+    width: $main-width;
+    padding: 0;
+  }
+}
+
+.reverse-form__headline {
+  color: $sg-green2;
+}
+
+.reverse-form__form {
+  background-color: $sg-green3;
+  width: 100%;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+
+  @include media-mobilesmall {
+    padding: 40px;  
+  }
+}
+
+.reverse-form__form-input {
+  border-radius: 6px;
+  border: none;
+  padding: 10px;
+  font-size: $font-medium;
+  margin-bottom: 7px;
+  flex: 1 0 200px; 
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+
+  @include media-mobilesmall {
+    margin-right: 5px;
+    margin-bottom: 0;
+  }
+}
+
+.reverse-form__form-button {
+  border-radius: 6px;
+  background-color: $lightgrey;
+  color: $grey;
+  border: none;
+  padding: 13px 20px;
+  flex: 0 0 100%;
+
+  @include media-mobilesmall {
+    flex: 0 0 auto;
+  }
+}
+
+.reverse-form__result {
+  color: $sg-green5;
+  font-size: $font-big;
+  text-align: center;
+}

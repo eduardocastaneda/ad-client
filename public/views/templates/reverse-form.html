@@ -1,0 +1,10 @@
+<div class="reverse-form">
+  <h2 class="reverse-form__headline">Skriv in en mening som skall översättas</h2>
+  <form class="reverse-form__form" ng-submit="submit()">
+    <input class="reverse-form__form-input" ng-focus type="text" ng-model="message" ng-keyup="reverseMessage(message)" name="text" autocomplete="off" />
+    <input class="reverse-form__form-button" type="submit" id="submit" value="ÖVERSÄTT" />
+  </form>
+  <div class="reverse-form__result">
+    <h2 ng-bind="reversedMessage"></h2> 
+  </div>
+</div>

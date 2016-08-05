@@ -8,11 +8,13 @@ var reverseController = require('./controllers/reverse');
 var reverseService = require('./services/reverse');
 var listService = require('./services/list');
 var reverseFormDirective = require('./directives/reverse-form');
+var config = require('./config.js');
 
-var app = angular.module('app', ['ngRoute']);
+angular.module("config", []).constant("config", config);
+var app = angular.module('app', ['ngRoute', 'config']);
 
-app.factory('Reverse', ['$http', reverseService]);
-app.factory('List', ['$http', listService]);
+app.factory('Reverse', ['$http', 'config', reverseService]);
+app.factory('List', ['$http', 'config', listService]);
 
 app.directive('reverseForm', ['Reverse', '$location', reverseFormDirective]);
 
@@ -35,7 +37,16 @@ app.config(['$routeProvider', '$locationProvider' , function($routeProvider, $lo
 
   $locationProvider.html5Mode(true);
 }]);
-},{"./controllers/home":2,"./controllers/reverse":3,"./directives/reverse-form":4,"./services/list":5,"./services/reverse":6,"angular":10,"angular-route":8}],2:[function(require,module,exports){
+},{"./config.js":2,"./controllers/home":3,"./controllers/reverse":4,"./directives/reverse-form":5,"./services/list":6,"./services/reverse":7,"angular":11,"angular-route":9}],2:[function(require,module,exports){
+'use-strict';
+
+var config = {
+  "apiBaseUrl": "http://localhost:3000",
+  "siteUrl": "http://localhost:4000",
+};
+
+module.exports = config;
+},{}],3:[function(require,module,exports){
 'use strict';
 
 var home = function($scope) { 
@@ -43,7 +54,7 @@ var home = function($scope) {
 }
 
 module.exports = home;
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 var reverse = function($scope, Reverse, List, $routeParams) {
@@ -59,7 +70,7 @@ var reverse = function($scope, Reverse, List, $routeParams) {
 }
 
 module.exports = reverse;
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var reverseForm = function(Reverse, $location) {
@@ -85,15 +96,15 @@ var reverseForm = function(Reverse, $location) {
 }
 
 module.exports = reverseForm;
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
-var list = function($http) {
+var list = function($http, config) {
   return {
     get: function(callback) {
       $http({
           method: 'GET',
-          url: 'http://localhost:3000/list/'
+          url: config.apiBaseUrl + '/list/'
       }).then(function success(response) {
           callback(response.data);
           }, function error(response) {
@@ -104,15 +115,15 @@ var list = function($http) {
 }
 
 module.exports = list;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
-var reverse = function($http) {
+var reverse = function($http, config) {
   return {
     message: function(message, callback) {
       $http({
           method: 'POST',
-          url: 'http://localhost:3000/reverse/',
+          url: config.apiBaseUrl + '/reverse/',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
@@ -127,7 +138,7 @@ var reverse = function($http) {
 }
 
 module.exports = reverse;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -1198,11 +1209,11 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 require('./angular-route');
 module.exports = 'ngRoute';
 
-},{"./angular-route":7}],9:[function(require,module,exports){
+},{"./angular-route":8}],10:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -32971,8 +32982,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":9}]},{},[1]);
+},{"./angular":10}]},{},[1]);

@@ -1,11 +1,11 @@
 'use strict';
 
-var reverse = function($http) {
+var reverse = function($http, config) {
   return {
     message: function(message, callback) {
       $http({
           method: 'POST',
-          url: 'http://localhost:3000/reverse/',
+          url: config.apiBaseUrl + '/reverse/',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },

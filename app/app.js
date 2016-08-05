@@ -7,11 +7,13 @@ var reverseController = require('./controllers/reverse');
 var reverseService = require('./services/reverse');
 var listService = require('./services/list');
 var reverseFormDirective = require('./directives/reverse-form');
+var config = require('./config.js');
 
-var app = angular.module('app', ['ngRoute']);
+angular.module("config", []).constant("config", config);
+var app = angular.module('app', ['ngRoute', 'config']);
 
-app.factory('Reverse', ['$http', reverseService]);
-app.factory('List', ['$http', listService]);
+app.factory('Reverse', ['$http', 'config', reverseService]);
+app.factory('List', ['$http', 'config', listService]);
 
 app.directive('reverseForm', ['Reverse', '$location', reverseFormDirective]);
 

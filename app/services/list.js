@@ -1,11 +1,11 @@
 'use strict';
 
-var list = function($http) {
+var list = function($http, config) {
   return {
     get: function(callback) {
       $http({
           method: 'GET',
-          url: 'http://localhost:3000/list/'
+          url: config.apiBaseUrl + '/list/'
       }).then(function success(response) {
           callback(response.data);
           }, function error(response) {

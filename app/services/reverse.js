@@ -1,3 +1,5 @@
+'use strict';
+
 var reverse = function($http) {
   return {
     message: function(message, callback) {

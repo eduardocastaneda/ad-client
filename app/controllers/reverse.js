@@ -1,3 +1,5 @@
+'use strict';
+
 var reverse = function($scope, Reverse, List, $routeParams) {
   $scope.headerMessage = $routeParams.message.replace(/-/g, " ");
 

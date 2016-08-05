@@ -1,20 +1,22 @@
-require('angular')
-require('angular-route')
-var homeController = require('./controllers/home')
-var reverseController = require('./controllers/reverse')
-var reverseService = require('./services/reverse')
-var listService = require('./services/list')
-var reverseFormDirective = require('./directives/reverse-form')
+'use strict';
 
-var app = angular.module('app', ['ngRoute'])
+require('angular');
+require('angular-route');
+var homeController = require('./controllers/home');
+var reverseController = require('./controllers/reverse');
+var reverseService = require('./services/reverse');
+var listService = require('./services/list');
+var reverseFormDirective = require('./directives/reverse-form');
 
-app.factory('Reverse', ['$http', reverseService])
-app.factory('List', ['$http', listService])
+var app = angular.module('app', ['ngRoute']);
+
+app.factory('Reverse', ['$http', reverseService]);
+app.factory('List', ['$http', listService]);
 
 app.directive('reverseForm', ['Reverse', '$location', reverseFormDirective]);
 
-app.controller('HomeCtrl', ['$scope', '$routeParams', homeController])
-app.controller('ReverseCtrl', ['$scope', 'Reverse', 'List', '$routeParams', reverseController])
+app.controller('HomeCtrl', ['$scope', '$routeParams', homeController]);
+app.controller('ReverseCtrl', ['$scope', 'Reverse', 'List', '$routeParams', reverseController]);
 
 app.config(['$routeProvider', '$locationProvider' , function($routeProvider, $locationProvider) {
   $routeProvider

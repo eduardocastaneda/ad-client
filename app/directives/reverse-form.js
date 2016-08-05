@@ -1,3 +1,5 @@
+'use strict';
+
 var reverseForm = function(Reverse, $location) {
   return {
     restrict : 'E',

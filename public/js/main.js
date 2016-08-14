@@ -10,7 +10,7 @@ var listService = require('./services/list');
 var reverseFormDirective = require('./directives/reverse-form');
 var config = require('./config.js');
 
-angular.module("config", []).constant("config", config);
+angular.module('config', []).constant('config', config);
 var app = angular.module('app', ['ngRoute', 'config']);
 
 app.factory('Reverse', ['$http', 'config', reverseService]);
@@ -21,7 +21,7 @@ app.directive('reverseForm', ['Reverse', '$location', reverseFormDirective]);
 app.controller('HomeCtrl', ['$scope', '$routeParams', homeController]);
 app.controller('ReverseCtrl', ['$scope', 'Reverse', 'List', '$routeParams', reverseController]);
 
-app.config(['$routeProvider', '$locationProvider' , function($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider' , function ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '/views/home.html',
@@ -37,15 +37,17 @@ app.config(['$routeProvider', '$locationProvider' , function($routeProvider, $lo
 
   $locationProvider.html5Mode(true);
 }]);
+
 },{"./config.js":2,"./controllers/home":3,"./controllers/reverse":4,"./directives/reverse-form":5,"./services/list":6,"./services/reverse":7,"angular":11,"angular-route":9}],2:[function(require,module,exports){
 'use-strict';
 
 var config = {
-  "apiBaseUrl": "http://localhost:3000",
-  "siteUrl": "http://localhost:4000",
+  'apiBaseUrl': 'http://localhost:3000',
+  'siteUrl': 'http://localhost:4000',
 };
 
 module.exports = config;
+
 },{}],3:[function(require,module,exports){
 'use strict';
 
@@ -54,22 +56,24 @@ var home = function($scope) {
 }
 
 module.exports = home;
+
 },{}],4:[function(require,module,exports){
 'use strict';
 
-var reverse = function($scope, Reverse, List, $routeParams) {
-  $scope.headerMessage = $routeParams.message.replace(/-/g, " ");
+var reverse = function ($scope, Reverse, List, $routeParams) {
+  $scope.headerMessage = $routeParams.message.replace(/-/g, ' ');
 
-  List.get(function(result){
+  List.get(function (result) {
     $scope.relatedItems = result;
   })
 
-  Reverse.message($scope.headerMessage, function(result) {
+  Reverse.message($scope.headerMessage, function (result) {
     $scope.headerReversedMessage = result;
   });
 }
 
 module.exports = reverse;
+
 },{}],5:[function(require,module,exports){
 'use strict';
 
@@ -78,16 +82,16 @@ var reverseForm = function(Reverse, $location) {
     restrict : 'E',
     templateUrl: '/views/templates/reverse-form.html',
 
-    link: function(scope) {
+    link: function (scope) {
       scope.message = '';
   
-      scope.submit = function() {
+      scope.submit = function () {
           var message = scope.message;
           $location.path('/reverse/' + message.replace(/ /g, '-'));
       }
 
-      scope.reverseMessage = function(message) {
-        Reverse.message(message, function(result) {
+      scope.reverseMessage = function (message) {
+        Reverse.message(message, function (result) {
           scope.reversedMessage = result;
         });
       }
@@ -96,6 +100,7 @@ var reverseForm = function(Reverse, $location) {
 }
 
 module.exports = reverseForm;
+
 },{}],6:[function(require,module,exports){
 'use strict';
 
@@ -105,9 +110,9 @@ var list = function($http, config) {
       $http({
           method: 'GET',
           url: config.apiBaseUrl + '/list/'
-      }).then(function success(response) {
+      }).then(function success (response) {
           callback(response.data);
-          }, function error(response) {
+          }, function error (response) {
           console.log(response);
       });
     }
@@ -127,10 +132,10 @@ var reverse = function($http, config) {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
-          data:'message=' + message
-      }).then(function success(response) {
+          data: 'message=' + message
+      }).then(function success (response) {
           callback(response.data);
-          }, function error(response) {
+          }, function error (response) {
           console.log(response);
       });
     }
@@ -138,6 +143,7 @@ var reverse = function($http, config) {
 }
 
 module.exports = reverse;
+
 },{}],8:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.8

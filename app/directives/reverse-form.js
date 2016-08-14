@@ -5,16 +5,16 @@ var reverseForm = function(Reverse, $location) {
     restrict : 'E',
     templateUrl: '/views/templates/reverse-form.html',
 
-    link: function(scope) {
+    link: function (scope) {
       scope.message = '';
   
-      scope.submit = function() {
+      scope.submit = function () {
           var message = scope.message;
           $location.path('/reverse/' + message.replace(/ /g, '-'));
       }
 
-      scope.reverseMessage = function(message) {
-        Reverse.message(message, function(result) {
+      scope.reverseMessage = function (message) {
+        Reverse.message(message, function (result) {
           scope.reversedMessage = result;
         });
       }

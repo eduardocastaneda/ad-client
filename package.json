@@ -1,13 +1,9 @@
 {
   "name": "ad-client",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "protractor ./test/protractor/conf.js"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "browserify": "^13.1.0",
     "gulp": "^3.9.1",

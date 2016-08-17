@@ -21,7 +21,7 @@ app.directive('reverseForm', ['Reverse', '$location', reverseFormDirective]);
 app.controller('HomeCtrl', ['$scope', '$routeParams', homeController]);
 app.controller('ReverseCtrl', ['$scope', 'Reverse', 'List', '$routeParams', reverseController]);
 
-app.config(['$routeProvider', '$locationProvider' , function ($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '/views/home.html',
@@ -104,9 +104,9 @@ module.exports = reverseForm;
 },{}],6:[function(require,module,exports){
 'use strict';
 
-var list = function($http, config) {
+var list = function ($http, config) {
   return {
-    get: function(callback) {
+    get: function (callback) {
       $http({
           method: 'GET',
           url: config.apiBaseUrl + '/list/'
@@ -123,9 +123,9 @@ module.exports = list;
 },{}],7:[function(require,module,exports){
 'use strict';
 
-var reverse = function($http, config) {
+var reverse = function ($http, config) {
   return {
-    message: function(message, callback) {
+    message: function (message, callback) {
       $http({
           method: 'POST',
           url: config.apiBaseUrl + '/reverse/',

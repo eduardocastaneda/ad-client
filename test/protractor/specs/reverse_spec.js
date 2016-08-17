@@ -6,7 +6,7 @@ describe('reverse input and result', function() {
     
     element(by.model("message")).sendKeys("Jag äter mackor till frukost");
 
-    expect(element(by.binding("reversedMessage")).getText()).toEqual('gaj retä rokcam llit tsokurf');
+    expect(element(by.binding("reversedMessage")).getText()).toEqual('gaJ retä rokcam llit tsokurf');
   });
 
   it('Should get right reversed message after submit', function() {

@@ -25,7 +25,7 @@
 
 2. Uppdatera webdriver-manager
   * skriv "webdriver-manager update" i terminalen 
-  OBS! kräver att man har Java Development Kit (JDK) installerat
+  * OBS! kräver att man har Java Development Kit (JDK) installerat
 
 3. Starta webdrivern i ett nytt terminalfönster
   * skriv "webdriver-manager start" i terminalen

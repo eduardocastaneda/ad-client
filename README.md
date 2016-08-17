@@ -9,12 +9,13 @@
 2. Uppdatera npm
     * Öppna terminalen skriv "npm install npm -g" (kräver adminrättigheter)
 
-2. Stå i projektet och skriv "npm install" i terminalen
+3. Stå i projektet och skriv "npm install" i terminalen
 
-3. Starta applikationen genom att skriva "gulp" i terminalen
+4. Starta applikationen genom att skriva "gulp" i terminalen
    * serverapplikationen måste vara igång, starta den i ett nytt terminalfönster: https://github.com/eduardocastaneda/ad-server
 
 5. Surfa in på http://localhost:4000
+
 
 ## Kör igång tester ##
 

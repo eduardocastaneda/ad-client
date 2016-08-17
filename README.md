@@ -11,7 +11,7 @@
 
 2. Stå i projektet och skriv "npm install" i terminalen
 
-3. Starta applicationen genom att skriva "gulp" i terminalen
+3. Starta applikationen genom att skriva "gulp" i terminalen
    * serverapplikationen måste vara igång, starta den i ett nytt terminalfönster: https://github.com/eduardocastaneda/ad-server
 
 5. Surfa in på http://localhost:4000
@@ -24,7 +24,8 @@
   * skriv "npm install -g protractor" i terminalen
 
 2. Uppdatera webdriver-manager
-  * skriv "webdriver-manager update" i terminalen
+  * skriv "webdriver-manager update" i terminalen 
+  OBS! kräver att man har Java Development Kit (JDK) installerat
 
 3. Starta webdrivern i ett nytt terminalfönster
   * skriv "webdriver-manager start" i terminalen
